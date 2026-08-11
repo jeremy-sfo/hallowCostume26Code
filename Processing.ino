@@ -93,7 +93,9 @@ void animateCharacter(){
   } else{
     if(nextDelayTime == -1) return; // exit if the delay time has no value
 
-    if(millis() - nextDelayTime > prevMillis && !userMadeInput){ // if enough time has passed and we aren't currently inputting
+    waitSumTime(nextDelayTime); // wait the set random interval
+
+    if(!userMadeInput){ // if  we aren't currently inputting
       randomAction = random(100); // find a random number between 0 and 99
 
       if(randomAction != -1) decideRandomAnimation(); //. play a random animation
@@ -106,4 +108,14 @@ void processingLoop(){
   animateCharacter();
 
   prevMillis = millis();
+}
+
+void waitSumTime(unsigned long interval){
+  unsigned long previousTime = millis();
+
+  if(userMadeInput) return; // if the user made an input immediately exit
+
+  if(millis() - interval > previousTime) return; // if enough time passed exit
+
+  else delay(1); // otherwise wait 1ms
 }

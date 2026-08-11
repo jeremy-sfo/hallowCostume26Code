@@ -126,3 +126,10 @@ void processHeadPos();
 void decideRandomAnimation();
 void animateCharacter();
 
+void characterBlinkingAnimation();
+void characterLookAroundAnimation();
+void characterMoveMouthAnimation();
+void characterScreenSaverAnimation();
+
+void waitSumTime();
+
