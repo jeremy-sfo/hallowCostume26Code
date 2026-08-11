@@ -30,4 +30,6 @@ void loop(){
   processingLoop();
   updateOled();
 
+  characterBlinkingAnimation();
+
 }

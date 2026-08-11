@@ -12,6 +12,7 @@ SimulatedAxis currentAxis = YAW;
 HeadOrientation currentHeadPosition = NEUTRAL; // define a starting head position
 BehaviorMode currentBehavior = NORMAL; // define a starting behavior
 
+
 boolean characterDoingAnimation = false;
 unsigned long nextDelayTime = -1;
 unsigned long prevMillis = millis();
@@ -64,22 +65,13 @@ void drawCurrentFace(int x, int y){
 }
 
 void decideRandomAnimation(){
-  switch(randomAction){
+  if (randomAction < 44) characterBlinkingAnimation();
 
-    case randomAction < 44:
-      characterBlinkingAnimation();
+  else if (randomAction < 69) characterLookAroundAnimation();
 
-    case randomAction < 69:
-      characterLookAroundAnimation();
+  else if (randomAction < 89) characterMoveMouthAnimation();
 
-    case randomAction < 89:
-      characterMoveMouthAnimation();
-
-    case randomAction < 100:
-      characterScreenSaverAnimation();
-
-  } 
-
+  else characterScreenSaverAnimation();
 }
 
 
@@ -88,7 +80,6 @@ void animateCharacter(){
 
   if(!characterDoingAnimation){
     nextDelayTime = random(1800, 8000); // set a random delay time between 1.8 and 8 seconds
-    characterDoingAnimation = true;
 
   } else{
     if(nextDelayTime == -1) return; // exit if the delay time has no value
@@ -96,9 +87,13 @@ void animateCharacter(){
     waitSumTime(nextDelayTime); // wait the set random interval
 
     if(!userMadeInput){ // if  we aren't currently inputting
-      randomAction = random(100); // find a random number between 0 and 99
+      //randomAction = random(100); // find a random number between 0 and 99
+      if (!characterDoingAnimation){
+        characterBlinkingAnimation();
+        characterDoingAnimation = true;
+      } 
 
-      if(randomAction != -1) decideRandomAnimation(); //. play a random animation
+      //if(randomAction != -1) decideRandomAnimation(); //. play a random animation
     }
   }
 }

@@ -17,6 +17,8 @@ void setupOled(){
 }
 
 void updateOled(){
+  if(!userMadeInput) return;
+
   u8g2.clearBuffer();                  // Clear the internal memory buffer
   u8g2.setFont(u8g2_font_courR08_tr);    // Choose a suitable scannable font
 
@@ -29,5 +31,5 @@ void updateOled(){
   //u8g2.drawXBMP(0, 113, 20, 20, batteryFullIconBar);    // battery icon
   drawCurrentFace(6, 16);     // update the face
 
-u8g2.sendBuffer();                   // Push the buffer data to the screen
+  u8g2.sendBuffer();                   // Push the buffer data to the screen
 }

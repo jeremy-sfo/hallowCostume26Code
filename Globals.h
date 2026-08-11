@@ -80,12 +80,22 @@ enum BehaviorMode{ // emotion sets for different faces
   HELPFUL
 };
 
+enum RandomAnimation{
+  BLINK, 
+
+  LOOK_AROUND,
+
+  MOVE_MOUTH,
+
+  SCREEN_SAVER
+};
+
 
 // (processing.ino)
 extern SimulatedAxis currentAxis; 
 extern HeadOrientation currentHeadPosition; // define a starting head position 
 extern BehaviorMode currentBehavior; // define a starting behavior 
-extern RandomAnimation chosenAnimation 
+extern RandomAnimation chosenAnimation;
 
 /* -------- Icons -------- */
 

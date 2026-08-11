@@ -1,4 +1,6 @@
 void characterBlinkingAnimation(){
+  Serial.println("Animating");
+
   u8g2.drawXBMP(6, 16, 120, 50, blinkFace1);
   waitSumTime(500);
 
@@ -18,6 +20,8 @@ void characterBlinkingAnimation(){
   waitSumTime(400);
 
   u8g2.drawXBMP(6, 16, 120, 50, blinkFace3);
+
+  characterDoingAnimation = false;
 }
 
 void characterLookAroundAnimation(){
