@@ -80,7 +80,8 @@ void animateCharacter(){
 
   if(!characterDoingAnimation){ // if  we aren't currently animating something
 
-    nextDelayTime = random(1800, 8000); // set a random delay time between 1.8 and 8 seconds
+    //nextDelayTime = random(1800, 8000); // set a random delay time between 1.8 and 8 seconds
+    nextDelayTime = 100; // temporary
     waitSumTime(nextDelayTime); // wait the set random interval
 
     randomAction = random(100); // find a random number between 0 and 99
