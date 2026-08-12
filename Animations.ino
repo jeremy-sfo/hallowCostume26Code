@@ -1,26 +1,34 @@
 void characterBlinkingAnimation(){
-  Serial.println("Animating");
+  Serial.println(nextDelayTime);
 
+  u8g2.clearBuffer();
   u8g2.drawXBMP(6, 16, 120, 50, blinkFace1);
-  waitSumTime(500);
+  u8g2.sendBuffer(); 
 
-  u8g2.drawXBMP(6, 16, 120, 50, blinkFace2);
-  waitSumTime(400);
+  waitSumTime(10);
 
+  u8g2.clearBuffer();
   u8g2.drawXBMP(6, 16, 120, 50, blinkFace3);
-  waitSumTime(200);
+  u8g2.sendBuffer();
 
+  waitSumTime(8);
+
+  u8g2.clearBuffer();
   u8g2.drawXBMP(6, 16, 120, 50, blinkFace4);
-  waitSumTime(80);
+  u8g2.sendBuffer(); 
 
-  u8g2.drawXBMP(6, 16, 120, 50, blinkFace1);
-  waitSumTime(200);
+  waitSumTime(5);
 
-  u8g2.drawXBMP(6, 16, 120, 50, blinkFace2);
-  waitSumTime(400);
-
+  u8g2.clearBuffer();
   u8g2.drawXBMP(6, 16, 120, 50, blinkFace3);
+  u8g2.sendBuffer(); 
 
+  waitSumTime(5);
+
+  u8g2.clearBuffer();
+  u8g2.drawXBMP(6, 16, 120, 50, blinkFace1);
+  u8g2.sendBuffer(); 
+  
   characterDoingAnimation = false;
 }
 
