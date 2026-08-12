@@ -28,8 +28,6 @@ void characterBlinkingAnimation(){
   u8g2.clearBuffer();
   u8g2.drawXBMP(6, 16, 120, 50, blinkFace1);
   u8g2.sendBuffer(); 
-  
-  characterDoingAnimation = false;
 }
 
 void characterLookAroundAnimation(){
