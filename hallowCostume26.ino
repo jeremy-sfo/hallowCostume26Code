@@ -20,6 +20,8 @@ void setup(){
   setupPoten();
   setupOled();
 
+  nextDelayTime = random(1800, 8000);
+  animationTimer = millis();
 }
 
 

@@ -76,21 +76,23 @@ void decideRandomAnimation(){
 
 
 void animateCharacter(){
-  if(userMadeInput) return; // exit the moment the user made an input
+  if(userMadeInput) return;
 
-  if(!characterDoingAnimation){ // if  we aren't currently animating something
+  if(!characterDoingAnimation){
 
-    //nextDelayTime = random(1800, 8000); // set a random delay time between 1.8 and 8 seconds
-    nextDelayTime = 100; // temporary
-    waitSumTime(nextDelayTime); // wait the set random interval
+    if(millis() - animationTimer >= nextDelayTime){
 
-    randomAction = random(100); // find a random number between 0 and 99
+      randomAction = random(100);
 
-    characterDoingAnimation = true;
+      characterDoingAnimation = true;
 
-    characterBlinkingAnimation();
+      characterBlinkingAnimation();
 
-    characterDoingAnimation = false;
+      characterDoingAnimation = false;
+
+      nextDelayTime = random(1800, 8000);
+      animationTimer = millis();
+    }
   }
 }
 
@@ -101,7 +103,7 @@ void processingLoop(){
   prevMillis = millis();
 }
 
-void waitSumTime(unsigned long interval){
+/*void waitSumTime(unsigned long interval){
   unsigned long previousTime = millis();
 
   while (millis() - previousTime < interval){ // loop for the time of the interval
@@ -109,4 +111,4 @@ void waitSumTime(unsigned long interval){
         if(userMadeInput) return; // if the user made an input immediately exit
         delay(1); // otherwise wait 1ms
     }
-}
+}*/

@@ -45,6 +45,8 @@ extern unsigned long nextDelayTime; // random animation delay time
 extern unsigned long prevMillis;
 extern int randomAction; // choose between 1-100 to simulate percents
 
+unsigned long animationTimer = 0;
+
 /* -------- Enums -------- */
 
 enum SimulatedAxis{ // change axis to experience different faces
@@ -141,5 +143,5 @@ void characterLookAroundAnimation();
 void characterMoveMouthAnimation();
 void characterScreenSaverAnimation();
 
-void waitSumTime();
+//void waitSumTime();
 
