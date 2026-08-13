@@ -17,7 +17,9 @@ void setupOled(){
 }
 
 void updateOled(){
+  
   if(!userMadeInput) return;
+  if(characterDoingAnimation) return;
 
   u8g2.clearBuffer();                  // Clear the internal memory buffer
   u8g2.setFont(u8g2_font_courR08_tr);    // Choose a suitable scannable font
