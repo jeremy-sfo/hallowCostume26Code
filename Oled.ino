@@ -9,11 +9,34 @@ DOESN'T handle logic
 ====================================================
 */
 
-U8G2_SSD1306_128X64_NONAME_F_SW_I2C u8g2(U8G2_R0, /* clock=*/ 14, /* data=*/ 12, /* reset=*/ U8X8_PIN_NONE);
+U8G2_SSD1306_128X64_NONAME_F_SW_I2C u8g2(U8G2_R0, /* clock=*/ 14, /* data=*/ 12, /* reset=*/ U8X8_PIN_NONE); // define the u8g2 for our oled to use
 
 void setupOled(){
 
   u8g2.begin(); // start the oled
+}
+
+const unsigned char* getBlinkBitmap(){
+  
+  switch(currentHeadPosition){
+
+    case NEUTRAL:
+      return epd_bitmap_allArray[5];
+
+    case FULL_LEFT:
+      return epd_bitmap_allArray[6];
+
+    case SLIGHT_LEFT:
+      return epd_bitmap_allArray[7];
+
+    case FULL_RIGHT:
+      return epd_bitmap_allArray[8];
+
+    case SLIGHT_RIGHT:
+      return epd_bitmap_allArray[9];
+  }
+
+  return epd_bitmap_allArray[5]; // in case the above dont happen have smth just in case
 }
 
 void updateOled(){

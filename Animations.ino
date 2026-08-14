@@ -9,35 +9,11 @@ void waitSumTime(unsigned long interval){
     }
 }
 
-const unsigned char* getBlinkFace(){
-  
-  switch(currentHeadPosition){
-
-    case NEUTRAL:
-      return epd_bitmap_allArray[6];
-
-    case FULL_LEFT:
-      return epd_bitmap_allArray[6];
-
-    case SLIGHT_LEFT:
-      return epd_bitmap_allArray[7];
-
-    case FULL_RIGHT:
-      return epd_bitmap_allArray[8];
-
-    case SLIGHT_RIGHT:
-      return epd_bitmap_allArray[9];
-  }
-
-  return epd_bitmap_allArray[5]; // in case the above dont happen have smth just in case
-}
-
-
 void characterBlinkingAnimation(){
   //Serial.println(nextDelayTime);
 
   u8g2.clearBuffer();
-  u8g2.drawXBMP(6, 16, 120, 50, getBlinkFace());
+  u8g2.drawXBMP(6, 16, 120, 50, getBlinkBitmap());
   u8g2.sendBuffer();
 
   waitSumTime(2);

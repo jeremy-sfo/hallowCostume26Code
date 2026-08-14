@@ -146,5 +146,7 @@ void characterLookAroundAnimation();
 void characterMoveMouthAnimation();
 void characterScreenSaverAnimation();
 
-//void waitSumTime();
+void waitSumTime();
+
+const unsigned char* getBlinkBitmap();
 

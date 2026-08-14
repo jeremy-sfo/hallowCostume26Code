@@ -14,13 +14,13 @@ BehaviorMode currentBehavior = NORMAL; // define a starting behavior
 
 
 boolean characterDoingAnimation = false;
-unsigned long nextDelayTime = -1;
+unsigned long nextDelayTime = 0;
 unsigned long prevMillis = millis();
-int randomAction = -1;
+int randomAction = 0;
 unsigned long animationTimer = 0;
 
 
-void processHeadPos(){ // take the raw poten value and assign it a enum state
+void processHeadPos(){ // // convert the potentiometer reading into one of five head orientations.
 
   if(rawPotenValue < 215){
     currentHeadPosition = FULL_LEFT;
@@ -81,6 +81,8 @@ void drawCurrentFace(int x, int y){
 
 void animateCharacter() {
 
+  /* FOR DEBUGGING ANIMATIONS
+  
   Serial.print("input=");
   Serial.print(userMadeInput);
 
@@ -91,15 +93,13 @@ void animateCharacter() {
   Serial.print(millis() - animationTimer);
 
   Serial.print(" target=");
-  Serial.println(nextDelayTime);
+  Serial.println(nextDelayTime);*/
 
   if (userMadeInput) return;
 
   if (!characterDoingAnimation) {
 
     if (millis() - animationTimer >= nextDelayTime) {
-
-      Serial.println(">>> ANIMATION TRIGGERED <<<");
 
       characterDoingAnimation = true;
 
