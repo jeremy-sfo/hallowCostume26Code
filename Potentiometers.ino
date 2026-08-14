@@ -24,6 +24,8 @@ void readPoten(){
 
   if(prevPotenValue - rawPotenValue > 5 || rawPotenValue - prevPotenValue > 5){ // if the user probably touched the potentiometer
     userMadeInput = true;
+  } else {
+    userMadeInput = false;
   }
 
   prevPotenValue = rawPotenValue; // reset prev poten value

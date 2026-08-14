@@ -76,11 +76,26 @@ void decideRandomAnimation(){
 
 
 void animateCharacter() {
+
+  Serial.print("input=");
+  Serial.print(userMadeInput);
+
+  Serial.print(" animation=");
+  Serial.print(characterDoingAnimation);
+
+  Serial.print(" elapsed=");
+  Serial.print(millis() - animationTimer);
+
+  Serial.print(" target=");
+  Serial.println(nextDelayTime);
+
   if (userMadeInput) return;
 
   if (!characterDoingAnimation) {
 
     if (millis() - animationTimer >= nextDelayTime) {
+
+      Serial.println(">>> ANIMATION TRIGGERED <<<");
 
       characterDoingAnimation = true;
 
