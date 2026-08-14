@@ -17,25 +17,36 @@ boolean characterDoingAnimation = false;
 unsigned long nextDelayTime = -1;
 unsigned long prevMillis = millis();
 int randomAction = -1;
+int blinkAnimationIndex = 5; // set it to neutral face blinking
+unsigned long animationTimer = 0;
 
 
 void processHeadPos(){ // take the raw poten value and assign it a enum state
 
-    if(rawPotenValue < 215){
-        currentHeadPosition = FULL_LEFT;
-    }
-    else if(rawPotenValue < 417){
-        currentHeadPosition = SLIGHT_LEFT;
-    }
-    else if(rawPotenValue < 619){
-        currentHeadPosition = NEUTRAL;
-    }
-    else if(rawPotenValue < 821){
-        currentHeadPosition = SLIGHT_RIGHT;
-    }
-    else{
-        currentHeadPosition = FULL_RIGHT;
-    }
+  if(rawPotenValue < 215){
+    currentHeadPosition = FULL_LEFT;
+    blinkAnimationIndex = 6;
+  }
+
+  else if(rawPotenValue < 417){
+    currentHeadPosition = SLIGHT_LEFT;
+    blinkAnimationIndex = 7;
+  }
+
+  else if(rawPotenValue < 619){
+    currentHeadPosition = NEUTRAL;
+    blinkAnimationIndex = 5;
+  } 
+
+  else if(rawPotenValue < 821){
+    currentHeadPosition = SLIGHT_RIGHT;
+    blinkAnimationIndex = 9;
+  }
+
+  else{
+    currentHeadPosition = FULL_RIGHT;
+    blinkAnimationIndex = 8;
+  }
 }
 
 void drawCurrentFace(int x, int y){

@@ -43,9 +43,13 @@ extern int prevPotenValue; // stores the last ms' poten value
 extern boolean characterDoingAnimation;
 extern unsigned long nextDelayTime; // random animation delay time
 extern unsigned long prevMillis;
-extern int randomAction; // choose between 1-100 to simulate percents
 
-unsigned long animationTimer = 0;
+
+extern int randomAction; // choose between 1-100 to simulate percents
+extern int blinkAnimationIndex; // switches different faces of direction when blinking
+extern unsigned long animationTimer; // timer to choose random animations
+
+extern const unsigned char* epd_bitmap_allArray[];
 
 /* -------- Enums -------- */
 

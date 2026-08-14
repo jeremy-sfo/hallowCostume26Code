@@ -22,11 +22,13 @@ void setupPoten(){
 void readPoten(){
   rawPotenValue = analogRead(potenPin); // read the value of the knob
 
-  if(prevPotenValue - rawPotenValue > 5 || rawPotenValue - prevPotenValue > 5){ // if the user probably touched the potentiometer
-    userMadeInput = true;
-  } else {
-    userMadeInput = false;
-  }
+  // add dead zones at the end of the poten range to reduce jittering
+  if(rawPotenValue <= 25) rawPotenValue = 0; 
+  if(rawPotenValue >= 1000) rawPotenValue = 1023;
+
+  if(abs(rawPotenValue - prevPotenValue > 5)) userMadeInput = true; // if the user probably touched the potentiometer
+
+  else userMadeInput = false;
 
   prevPotenValue = rawPotenValue; // reset prev poten value
 }

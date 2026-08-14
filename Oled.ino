@@ -17,8 +17,7 @@ void setupOled(){
 }
 
 void updateOled(){
-  
-  if(!userMadeInput) return;
+
   if(characterDoingAnimation) return;
 
   u8g2.clearBuffer();                  // Clear the internal memory buffer
