@@ -17,7 +17,6 @@ boolean characterDoingAnimation = false;
 unsigned long nextDelayTime = -1;
 unsigned long prevMillis = millis();
 int randomAction = -1;
-int blinkAnimationIndex = 5; // set it to neutral face blinking
 unsigned long animationTimer = 0;
 
 
@@ -25,28 +24,33 @@ void processHeadPos(){ // take the raw poten value and assign it a enum state
 
   if(rawPotenValue < 215){
     currentHeadPosition = FULL_LEFT;
-    blinkAnimationIndex = 6;
   }
 
   else if(rawPotenValue < 417){
     currentHeadPosition = SLIGHT_LEFT;
-    blinkAnimationIndex = 7;
   }
 
   else if(rawPotenValue < 619){
     currentHeadPosition = NEUTRAL;
-    blinkAnimationIndex = 5;
   } 
 
   else if(rawPotenValue < 821){
     currentHeadPosition = SLIGHT_RIGHT;
-    blinkAnimationIndex = 9;
   }
 
   else{
     currentHeadPosition = FULL_RIGHT;
-    blinkAnimationIndex = 8;
   }
+}
+
+void decideRandomAnimation(){
+  if (randomAction < 44) characterBlinkingAnimation();
+
+  else if (randomAction < 69) characterLookAroundAnimation();
+
+  else if (randomAction < 89) characterMoveMouthAnimation();
+
+  else characterScreenSaverAnimation();
 }
 
 void drawCurrentFace(int x, int y){
@@ -74,17 +78,6 @@ void drawCurrentFace(int x, int y){
       break;
   }
 }
-
-void decideRandomAnimation(){
-  if (randomAction < 44) characterBlinkingAnimation();
-
-  else if (randomAction < 69) characterLookAroundAnimation();
-
-  else if (randomAction < 89) characterMoveMouthAnimation();
-
-  else characterScreenSaverAnimation();
-}
-
 
 void animateCharacter() {
 
@@ -125,14 +118,4 @@ void processingLoop(){
   animateCharacter();
 
   prevMillis = millis();
-}
-
-void waitSumTime(unsigned long interval){
-  unsigned long previousTime = millis();
-
-  while (millis() - previousTime < interval){ // loop for the time of the interval
-
-        if(userMadeInput) return; // if the user made an input immediately exit
-        delay(1); // otherwise wait 1ms
-    }
 }
