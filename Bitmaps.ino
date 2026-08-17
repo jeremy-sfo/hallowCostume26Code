@@ -514,17 +514,18 @@ const unsigned char blinkFace5 [] PROGMEM = {
 	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
 };
 
-// array of all bitmaps for convenience. 
-const int epd_bitmap_allArray_LEN = 10;
-const unsigned char* epd_bitmap_allArray[10] = {
-	neutralFace,
+const unsigned char* directionalBitmaps[5] = {
 	fullRightFace,
-	fullLeftFace,
-	slightLeftFace,
 	slightRightFace,
+	neutralFace,
+	slightLeftFace,
+	fullLeftFace
+};
+
+const unsigned char* expressionBitmaps[5] = {
+	blinkFace4,
+	blinkFace5,
 	blinkFace1,
 	blinkFace2,
-	blinkFace3,
-	blinkFace4,
-	blinkFace5
+	blinkFace3
 };

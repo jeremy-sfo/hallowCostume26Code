@@ -19,16 +19,15 @@ important booleans
 #include <Wire.h>
 
 /* ---------------- OLED ---------------- */
-extern U8G2_SSD1306_128X64_NONAME_F_SW_I2C u8g2; // define the oled
 
+extern U8G2_SSD1306_128X64_NONAME_F_SW_I2C u8g2; // define the oled
 
 /* ---------------- Pins ---------------- */
 
 const byte buttonPin = D5;
-
 const byte potenPin = A0;
 
-/* ---------------- Variables ---------------- */
+/* ---------------- VARIABLES ---------------- */
 
 // ANTI-DEBOUNCE
 extern long debounceDelay; 
@@ -36,22 +35,46 @@ extern unsigned long lastDebounceTime; // previouse debounce time [extern: decla
 
 // POTENTIOMETER
 extern int rawPotenValue; // value of the potentiometer (poten.ino)
-
-extern boolean userMadeInput; // if the user inputted something
 extern int prevPotenValue; // stores the last ms' poten value
 
-extern boolean characterDoingAnimation;
+// DETECTION
+extern boolean userMadeInput; // if the user inputted something
+extern boolean characterDoingAnimation; // if there is currently an animation playing
+
+// DIRECTION STATES
+extern HeadOrientation currentFaceDirection; // the direction the user wants
+extern HeadOrientation animationFaceDirection; // the direction the animation chooses
+
+// DIRECTION DATA
+extern const unsigned char* directionalBitmaps[];
+extern SimulatedAxis currentAxis;
+
+// EXPRESSION STATES
+extern const unsigned char* expressionBitmaps[];
+extern const RandomAnimation animationFaceDisplay;
+
+// EXPRESSION DATA
+extern int randomAction; // choose between 1-100 to simulate percents
+extern BehaviorMode currentBehavior; // define a starting behavior 
+
+// TIME
 extern unsigned long nextDelayTime; // random animation delay time
 extern unsigned long prevMillis;
-
-
-extern int randomAction; // choose between 1-100 to simulate percents
 extern unsigned long animationTimer; // timer to choose random animations
 
-extern const unsigned char* epd_bitmap_allArray[];
+/* ---------- BITMAP DECLARATION --------- */
+extern const unsigned char neutralFace[]; 
+extern const unsigned char slightLeftFace[];
+extern const unsigned char slightRightFace[];
+extern const unsigned char fullLeftFace[];
+extern const unsigned char fullRightFace[];
 
-/* -------- Enums -------- */
+extern const unsigned char blinkFace1[];
+extern const unsigned char blinkFace2[];
+extern const unsigned char blinkFace3[];
+extern const unsigned char blinkFace4[];
 
+/* ---------------- ENUMS ---------------- */
 enum SimulatedAxis{ // change axis to experience different faces
     YAW,
     PITCH
@@ -95,40 +118,14 @@ enum RandomAnimation{
   SCREEN_SAVER
 };
 
-
-// (processing.ino)
-extern SimulatedAxis currentAxis; 
-extern HeadOrientation currentHeadPosition; // define a starting head position 
-extern BehaviorMode currentBehavior; // define a starting behavior 
-extern RandomAnimation chosenAnimation;
-
-/* -------- Icons -------- */
-
-// define all bitmaps here
-extern const unsigned char neutralFace[]; 
-extern const unsigned char slightLeftFace[];
-extern const unsigned char slightRightFace[];
-extern const unsigned char fullLeftFace[];
-extern const unsigned char fullRightFace[];
-
-extern const unsigned char blinkFace1[];
-extern const unsigned char blinkFace2[];
-extern const unsigned char blinkFace3[];
-extern const unsigned char blinkFace4[];
-
-extern int epdBitmapAllArrayLEN; // length of bitmap array
-extern const unsigned char* epdBitmapAllArray[];
-
-
-
-/* -------- Setup -------- */
+/* ------------ SETUP ------------- */
 void setupButtons();
 void setupPoten();
 void setupOled();
 
 
 
-/* -------- Loops -------- */
+/* ------------- LOOPS ------------- */
 void readButtons();
 void readPoten();
 void updateOled();
@@ -136,7 +133,7 @@ void updateOled();
 void drawCurrentFace();
 void processHeadPos();
 
-/* -------- Animations -------- */
+/* ----------- PROCESSING ----------- */
 
 void decideRandomAnimation();
 void animateCharacter();

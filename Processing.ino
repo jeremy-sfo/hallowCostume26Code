@@ -10,7 +10,9 @@ information and tell the oled what to display
 // define values from globals.h
 SimulatedAxis currentAxis = YAW;
 HeadOrientation currentHeadPosition = NEUTRAL; // define a starting head position
+HeadOrientation animationFacePosition = NEUTRAL;
 BehaviorMode currentBehavior = NORMAL; // define a starting behavior
+
 
 
 boolean characterDoingAnimation = false;
@@ -43,7 +45,8 @@ void processHeadPos(){ // // convert the potentiometer reading into one of five 
   }
 }
 
-void decideRandomAnimation(){
+void decideRandomAnimation(){ // decide which random animation we will do
+
   if (randomAction < 44) characterBlinkingAnimation();
 
   else if (randomAction < 69) characterLookAroundAnimation();
@@ -53,26 +56,34 @@ void decideRandomAnimation(){
   else characterScreenSaverAnimation();
 }
 
+void setAnimationFace(const unsigned char* face) { animationFace = face; } // function for setting the face of the animation
+
 void drawCurrentFace(int x, int y){
 
-  switch(currentHeadPosition){ // loop through the head positions and decide which face to put on
+  if(characterDoingAnimation){ // if we need to make animations use this
 
-    case NEUTRAL:
-      u8g2.drawXBMP(x, y, 120, 50, neutralFace);
+    u8g2.drawXBMP(x, y, 120, 50, animationFace);
+    return;
+  }
+
+  switch(currentHeadPosition){ // otherwise for normal faces use this
+
+    case FULL_LEFT:
+      u8g2.drawXBMP(x, y, 120, 50, fullLeftFace);
       break;
 
     case SLIGHT_LEFT:
       u8g2.drawXBMP(x, y, 120, 50, slightLeftFace);
       break;
-    
-    case FULL_LEFT:
-      u8g2.drawXBMP(x, y, 120, 50, fullLeftFace);
+
+    case NEUTRAL:
+      u8g2.drawXBMP(x, y, 120, 50, neutralFace);
       break;
 
     case SLIGHT_RIGHT:
       u8g2.drawXBMP(x, y, 120, 50, slightRightFace);
       break;
-    
+
     case FULL_RIGHT:
       u8g2.drawXBMP(x, y, 120, 50, fullRightFace);
       break;
