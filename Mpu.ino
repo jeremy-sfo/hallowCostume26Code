@@ -10,12 +10,12 @@ Handles:
 ====================================================
 */
 
-const int MPU_ADRESS = 0x68; // adress for the mpu module
+const int MPU_ADDRESS = 0x68; // adress for the mpu module
 
 void setupMPU(){
 
-  Wire.beginTransmission(MPU_ADRESS); // wake up the mpu at its adress
-  Wire.write(0x68); // start writing at that location
+  Wire.beginTransmission(MPU_ADDRESS); // wake up the mpu at its adress
+  Wire.write(0x6B); // start writing at that location
   Wire.write(0);
   Wire.endTransmission(true);
 
@@ -26,12 +26,14 @@ void setupMPU(){
 void readMPU(){
 
   // tell the mpu we want to start reading at 0x3B
-  Wire.beginTransmission(MPU_ADRESS); 
+  Wire.beginTransmission(MPU_ADDRESS); 
   Wire.write(0x3B);
   Wire.endTransmission();
 
-  // Request 14 bytes: Accel X, Y, Z | Temperature | Gyro X, Y, Z
-  Wire.requestFrom(MPU_ADRESS, 14, true);
+  // request 14 bytes: Accel X, Y, Z | Temperature | Gyro X, Y, Z
+  Wire.requestFrom((uint8_t)MPU_ADDRESS, (size_t)14, true);
+
+  if(Wire.available() < 14) return; // have a check to make sure wire is responding 14 bytes
 
   // read the 3 axis for the acl
   int16_t accelX = Wire.read() << 8 | Wire.read();

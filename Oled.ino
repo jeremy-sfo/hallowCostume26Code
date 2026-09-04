@@ -18,25 +18,25 @@ void setupOled(){
 
 const unsigned char* getBlinkBitmap(){
   
-  switch(currentHeadPosition){
-
-    case NEUTRAL:
-      return epd_bitmap_allArray[5];
-
-    case FULL_LEFT:
-      return epd_bitmap_allArray[6];
-
-    case SLIGHT_LEFT:
-      return epd_bitmap_allArray[7];
+  switch(currentFaceDirection){
 
     case FULL_RIGHT:
-      return epd_bitmap_allArray[8];
+      return directionalBitmaps[0];
 
     case SLIGHT_RIGHT:
-      return epd_bitmap_allArray[9];
+      return directionalBitmaps[1];
+
+    case NEUTRAL:
+      return directionalBitmaps[2];
+
+    case SLIGHT_LEFT:
+      return directionalBitmaps[3];
+
+    case FULL_LEFT:
+      return directionalBitmaps[4];
   }
 
-  return epd_bitmap_allArray[5]; // in case the above dont happen have smth just in case
+  return directionalBitmaps[2]; // in case the above dont happen have smth just in case
 }
 
 void updateOled(){
@@ -49,8 +49,7 @@ void updateOled(){
   u8g2.setCursor(0, 10);               // Set position to X=0, Y=15
   u8g2.print(millis());                // Natively prints numbers
 
-  u8g2.setCursor(64, 10);               // Set position to X=0, Y=35
-  u8g2.print(rawPotenValue);      
+  u8g2.setCursor(64, 10);               // Set position to X=0, Y=35    
 
   //u8g2.drawXBMP(0, 113, 20, 20, batteryFullIconBar);    // battery icon
   drawCurrentFace(6, 16);     // update the face

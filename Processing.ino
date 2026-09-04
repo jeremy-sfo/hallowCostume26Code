@@ -18,29 +18,34 @@ unsigned long nextDelayTime = 0;
 unsigned long prevMillis = millis();
 int randomAction = 0;
 unsigned long animationTimer = 0;
+bool userMadeInput = false;
+
+const unsigned char* animationFaceDisplay = neutralFace;
 
 
 void processHeadPos(){ // // convert the potentiometer reading into one of five head orientations.
 
-  if(rawPotenValue < 215){
-    currentHeadPosition = FULL_LEFT;
+  /*if(rawPotenValue < 215){
+    currentFaceDirection = FULL_LEFT;
   }
 
   else if(rawPotenValue < 417){
-    currentHeadPosition = SLIGHT_LEFT;
+    currentFaceDirection = SLIGHT_LEFT;
   }
 
   else if(rawPotenValue < 619){
-    currentHeadPosition = NEUTRAL;
+    currentFaceDirection = NEUTRAL;
   } 
 
   else if(rawPotenValue < 821){
-    currentHeadPosition = SLIGHT_RIGHT;
+    currentFaceDirection = SLIGHT_RIGHT;
   }
 
   else{
-    currentHeadPosition = FULL_RIGHT;
-  }
+    currentFaceDirection = FULL_RIGHT;
+  }*/
+
+  currentFaceDirection = NEUTRAL;
 }
 
 void decideRandomAnimation(){ // decide which random animation we will do
@@ -54,17 +59,19 @@ void decideRandomAnimation(){ // decide which random animation we will do
   else characterScreenSaverAnimation();
 }
 
-void setAnimationFace(const unsigned char* face) { animationFace = face; } // function for setting the face of the animation
+void setAnimationFace(const unsigned char* face){ // function for setting the face of the animation
+   animationFaceDisplay = face; 
+} 
 
 void drawCurrentFace(int x, int y){
 
   if(characterDoingAnimation){ // if we need to make animations use this
 
-    u8g2.drawXBMP(x, y, 120, 50, animationFace);
+    u8g2.drawXBMP(x, y, 120, 50, animationFaceDisplay);
     return;
   }
 
-  switch(currentHeadPosition){ // otherwise for normal faces use this
+  switch(currentFaceDirection){ // otherwise for normal faces use this
 
     case FULL_LEFT:
       u8g2.drawXBMP(x, y, 120, 50, fullLeftFace);
@@ -123,7 +130,7 @@ void animateCharacter() {
 }
 
 void processingLoop(){
-  processHeadPos();
+ // processHeadPos();
   animateCharacter();
 
   prevMillis = millis();

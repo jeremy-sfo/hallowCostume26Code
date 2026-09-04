@@ -25,42 +25,6 @@ extern U8G2_SSD1306_128X64_NONAME_F_SW_I2C u8g2; // define the oled
 /* ---------------- Pins ---------------- */
 
 const byte buttonPin = D5;
-const byte potenPin = A0;
-
-/* ---------------- VARIABLES ---------------- */
-
-// ANTI-DEBOUNCE
-extern long debounceDelay; 
-extern unsigned long lastDebounceTime; // previouse debounce time [extern: declared but not defined here]
-
-// MPU
-extern int MPU_ADRESS;
-
-
-// DETECTION
-extern boolean userMadeInput; // if the user inputted something
-extern boolean characterDoingAnimation; // if there is currently an animation playing
-
-// DIRECTION STATES
-extern HeadOrientation currentFaceDirection; // the direction the user wants
-extern HeadOrientation animationFaceDirection; // the direction the animation chooses
-
-// DIRECTION DATA
-extern const unsigned char* directionalBitmaps[];
-extern SimulatedAxis currentAxis;
-
-// EXPRESSION STATES
-extern const unsigned char* blinkBitmaps[];
-extern const unsigned char* animationFaceDisplay;
-
-// EXPRESSION DATA
-extern int randomAction; // choose between 1-100 to simulate percents
-extern BehaviorMode currentBehavior; // define a starting behavior 
-
-// TIME
-extern unsigned long nextDelayTime; // random animation delay time
-extern unsigned long prevMillis;
-extern unsigned long animationTimer; // timer to choose random animations
 
 /* ---------- BITMAP DECLARATION --------- */
 extern const unsigned char neutralFace[]; 
@@ -105,6 +69,40 @@ enum RandomAnimation{
 
   SCREEN_SAVER
 };
+
+/* ---------------- VARIABLES ---------------- */
+
+// ANTI-DEBOUNCE
+extern long debounceDelay; 
+extern unsigned long lastDebounceTime; // previouse debounce time [extern: declared but not defined here]
+
+// MPU
+extern const int MPU_ADDRESS;
+
+// DETECTION
+extern boolean userMadeInput; // if the user inputted something
+extern boolean characterDoingAnimation; // if there is currently an animation playing
+
+// DIRECTION STATES
+extern HeadOrientation currentFaceDirection; // the direction the user wants
+extern HeadOrientation animationFaceDirection; // the direction the animation chooses
+
+// DIRECTION DATA
+extern const unsigned char* directionalBitmaps[];
+extern SimulatedAxis currentAxis;
+
+// EXPRESSION STATES
+extern const unsigned char* blinkBitmaps[];
+extern const unsigned char* animationFaceDisplay;
+
+// EXPRESSION DATA
+extern int randomAction; // choose between 1-100 to simulate percents
+extern BehaviorMode currentBehavior; // define a starting behavior 
+
+// TIME
+extern unsigned long nextDelayTime; // random animation delay time
+extern unsigned long prevMillis;
+extern unsigned long animationTimer; // timer to choose random animations
 
 /* ------------ SETUP ------------- */
 void setupButtons();
