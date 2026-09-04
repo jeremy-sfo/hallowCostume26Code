@@ -33,9 +33,9 @@ const byte potenPin = A0;
 extern long debounceDelay; 
 extern unsigned long lastDebounceTime; // previouse debounce time [extern: declared but not defined here]
 
-// POTENTIOMETER
-extern int rawPotenValue; // value of the potentiometer (poten.ino)
-extern int prevPotenValue; // stores the last ms' poten value
+// MPU
+extern int MPU_ADRESS;
+
 
 // DETECTION
 extern boolean userMadeInput; // if the user inputted something
@@ -50,8 +50,8 @@ extern const unsigned char* directionalBitmaps[];
 extern SimulatedAxis currentAxis;
 
 // EXPRESSION STATES
-extern const unsigned char* expressionBitmaps[];
-extern const RandomAnimation animationFaceDisplay;
+extern const unsigned char* blinkBitmaps[];
+extern const unsigned char* animationFaceDisplay;
 
 // EXPRESSION DATA
 extern int randomAction; // choose between 1-100 to simulate percents
@@ -69,11 +69,6 @@ extern const unsigned char slightRightFace[];
 extern const unsigned char fullLeftFace[];
 extern const unsigned char fullRightFace[];
 
-extern const unsigned char blinkFace1[];
-extern const unsigned char blinkFace2[];
-extern const unsigned char blinkFace3[];
-extern const unsigned char blinkFace4[];
-
 /* ---------------- ENUMS ---------------- */
 enum SimulatedAxis{ // change axis to experience different faces
     YAW,
@@ -82,19 +77,12 @@ enum SimulatedAxis{ // change axis to experience different faces
 
 enum HeadOrientation{ // define some basic four axis face positions (add later: diagonal face sensing)
 
-  NEUTRAL,
-
-  SLIGHT_LEFT,
-  FULL_LEFT,
-
-  SLIGHT_RIGHT,
   FULL_RIGHT,
+  SLIGHT_RIGHT,
+  NEUTRAL,
+  SLIGHT_LEFT, 
+  FULL_LEFT
 
-  SLIGHT_UP,
-  FULL_UP,
-
-  SLIGHT_DOWN,
-  FULL_DOWN
 };
 
 enum BehaviorMode{ // emotion sets for different faces
@@ -120,14 +108,14 @@ enum RandomAnimation{
 
 /* ------------ SETUP ------------- */
 void setupButtons();
-void setupPoten();
+void setupMPU();
 void setupOled();
 
 
 
 /* ------------- LOOPS ------------- */
 void readButtons();
-void readPoten();
+void readMPU();
 void updateOled();
 
 void drawCurrentFace();
@@ -143,7 +131,8 @@ void characterLookAroundAnimation();
 void characterMoveMouthAnimation();
 void characterScreenSaverAnimation();
 
-void waitSumTime();
+void waitSumTime(unsigned long interval);
+void setAnimationFace(const unsigned char* face);
 
 const unsigned char* getBlinkBitmap();
 

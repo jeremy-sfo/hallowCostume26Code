@@ -1,12 +1,21 @@
+
 /*
 ====================================================
-Buttons Module
+***************** OLD MODULE *********************
+***************** DO NOT USE ********************
+====================================================
+*/
+
+
+/*
+====================================================
+Potentiometer Module
 
 Reads the  potentiometer(s), then turns that into a value from 0-1023 (esp8266's range)
 
 Does NOT contain switching emotions logic.
 ====================================================
-*/
+
 
 // define stuff from globals.h
 int rawPotenValue = 0; 
@@ -31,6 +40,6 @@ void readPoten(){
   else userMadeInput = false;
 
   prevPotenValue = rawPotenValue; // reset prev poten value
-}
+}*/
 
 

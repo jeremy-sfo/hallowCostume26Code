@@ -17,7 +17,7 @@ void setup(){
   Serial.begin(115200); // set the serial moniter baud
 
   setupButtons();
-  setupPoten();
+  setupMPU();
   setupOled();
 
   nextDelayTime = random(1800, 8000);
@@ -27,7 +27,7 @@ void setup(){
 
 void loop(){
   readButtons();
-  readPoten();
+  readMPU();
 
   processingLoop();
   updateOled();

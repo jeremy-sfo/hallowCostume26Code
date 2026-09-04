@@ -522,7 +522,7 @@ const unsigned char* directionalBitmaps[5] = {
 	fullLeftFace
 };
 
-const unsigned char* expressionBitmaps[5] = {
+const unsigned char* blinkBitmaps[5] = {
 	blinkFace4,
 	blinkFace5,
 	blinkFace1,

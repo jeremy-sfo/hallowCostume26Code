@@ -9,11 +9,9 @@ information and tell the oled what to display
 
 // define values from globals.h
 SimulatedAxis currentAxis = YAW;
-HeadOrientation currentHeadPosition = NEUTRAL; // define a starting head position
-HeadOrientation animationFacePosition = NEUTRAL;
+HeadOrientation currentFaceDirection = NEUTRAL;
+HeadOrientation animationFaceDirection = NEUTRAL;
 BehaviorMode currentBehavior = NORMAL; // define a starting behavior
-
-
 
 boolean characterDoingAnimation = false;
 unsigned long nextDelayTime = 0;
