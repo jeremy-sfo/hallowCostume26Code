@@ -18,32 +18,36 @@ unsigned long nextDelayTime = 0;
 unsigned long prevMillis = millis();
 int randomAction = 0;
 unsigned long animationTimer = 0;
+
 bool userMadeInput = false;
 
 const unsigned char* animationFaceDisplay = neutralFace;
 
+const int smallGravThreshold = 0.3;
+const int largeGravThreshold = 0.6;
 
-void processHeadPos(){ // // convert the potentiometer reading into one of five head orientations.
 
-  /*if(rawPotenValue < 215){
-    currentFaceDirection = FULL_LEFT;
-  }
+void processHeadPos(){ // // convert the MPU's reading into one of five head orientations.
 
-  else if(rawPotenValue < 417){
-    currentFaceDirection = SLIGHT_LEFT;
-  }
-
-  else if(rawPotenValue < 619){
-    currentFaceDirection = NEUTRAL;
-  } 
-
-  else if(rawPotenValue < 821){
-    currentFaceDirection = SLIGHT_RIGHT;
-  }
-
-  else{
+  if(accelYg < -largeGravThreshold){ // full right
     currentFaceDirection = FULL_RIGHT;
-  }*/
+    return;
+  }
+
+  if(accelYg < -smallGravThreshold){ // slight right
+    currentFaceDirection = SLIGHT_RIGHT;
+    return;
+  }
+
+  if(accelYg > smallGravThreshold){ // full right
+    currentFaceDirection = SLIGHT_LEFT;
+    return;
+  }
+
+  if(accelYg > largeGravThreshold){ // slight right
+    currentFaceDirection = FULL_LEFT;
+    return;
+  }
 
   currentFaceDirection = NEUTRAL;
 }
@@ -130,7 +134,7 @@ void animateCharacter() {
 }
 
 void processingLoop(){
- // processHeadPos();
+  processHeadPos();
   animateCharacter();
 
   prevMillis = millis();

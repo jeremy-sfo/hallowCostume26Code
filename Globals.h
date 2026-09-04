@@ -79,6 +79,14 @@ extern unsigned long lastDebounceTime; // previouse debounce time [extern: decla
 // MPU
 extern const int MPU_ADDRESS;
 
+extern float accelXg;
+extern float accelYg;
+extern float accelZg;
+
+extern float gyroXdps;
+extern float gyroYdps;
+extern float gyroZdps;
+
 // DETECTION
 extern boolean userMadeInput; // if the user inputted something
 extern boolean characterDoingAnimation; // if there is currently an animation playing
