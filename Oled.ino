@@ -36,7 +36,7 @@ const unsigned char* getBlinkBitmap(){
       return directionalBitmaps[4];
   }
 
-  return directionalBitmaps[2]; // in case the above dont happen have smth just in case
+  return directionalBitmaps[2]; // in case the above don't happen have smth just in case
 }
 
 void updateOled(){

@@ -23,29 +23,29 @@ bool userMadeInput = false;
 
 const unsigned char* animationFaceDisplay = neutralFace;
 
-const int smallGravThreshold = 0.3;
-const int largeGravThreshold = 0.6;
+const float smallGravThreshold = 0.25;
+const float largeGravThreshold = 0.5;
 
 
 void processHeadPos(){ // // convert the MPU's reading into one of five head orientations.
 
-  if(accelYg < -largeGravThreshold){ // full right
-    currentFaceDirection = FULL_RIGHT;
+  if(accelYg < -largeGravThreshold){ // full left
+    currentFaceDirection = FULL_LEFT;
     return;
   }
 
-  if(accelYg < -smallGravThreshold){ // slight right
-    currentFaceDirection = SLIGHT_RIGHT;
-    return;
-  }
-
-  if(accelYg > smallGravThreshold){ // full right
+  if(accelYg < -smallGravThreshold){ // slight left
     currentFaceDirection = SLIGHT_LEFT;
     return;
   }
 
-  if(accelYg > largeGravThreshold){ // slight right
-    currentFaceDirection = FULL_LEFT;
+  if(accelYg > smallGravThreshold){ // slight right
+    currentFaceDirection = SLIGHT_RIGHT;
+    return;
+  }
+
+  if(accelYg > largeGravThreshold){ // full right
+    currentFaceDirection = FULL_RIGHT;
     return;
   }
 

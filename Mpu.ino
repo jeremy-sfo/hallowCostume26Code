@@ -65,13 +65,13 @@ void readMPU(){
   int16_t gyroZ = Wire.read() << 8 | Wire.read();
 
   // convert values to useful units (Acl: gravity power, Gyro: °/second) and also round to the nearest tenth
-  accelXg = accelXg / 16384.0 / 10.0;
-  accelYg = accelYg / 16384.0 / 10.0;
-  accelZg = accelZg / 16384.0 / 10.0;
+  accelXg = round((accelX / 16384.0) * 10) / 10.0;
+  accelYg = round((accelY / 16384.0) * 10) / 10.0;
+  accelZg = round((accelZ / 16384.0) * 10) / 10.0;
 
-  gyroXdps = gyroX / 131.0/ 10.0;
-  gyroYdps = gyroY / 131.0/ 10.0;
-  gyroZdps = gyroZ / 131.0/ 10.0;
+  gyroXdps = round((gyroX / 131.0) * 10) / 10.0;
+  gyroYdps = round((gyroY / 131.0) * 10) / 10.0;
+  gyroZdps = round((gyroZ / 131.0) * 10) / 10.0;
 
   // TEST: print the mpu values
   Serial.print("Accel X: ");
