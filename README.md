@@ -32,8 +32,8 @@ OLED rendering and face selection.
 ### Animations.ino
 Character animations and animation timing.
 
-### Potentiometers.ino
-Potentiometer reading and input detection.
+### MPU.ino
+MPU reading for Acl and Gyro (maybe temperature in the future??)
 
 ### Bitmaps.ino
 Generated bitmap data.
