@@ -29,7 +29,6 @@ void loop(){
   readButtons();
   readMPU();
 
-  processingLoop();
   updateOled();
-
+  processingLoop();
 }

@@ -51,7 +51,6 @@ void updateOled(){
 
   u8g2.setCursor(64, 10);               // Set position to X=0, Y=35    
 
-  //u8g2.drawXBMP(0, 113, 20, 20, batteryFullIconBar);    // battery icon
   drawCurrentFace(6, 16);     // update the face
 
   u8g2.sendBuffer();                   // Push the buffer data to the screen

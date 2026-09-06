@@ -19,6 +19,15 @@ float gyroXdps;
 float gyroYdps;
 float gyroZdps;
 
+// define the mpu checking variables
+float accelXgPrev = 0;
+float accelYgPrev = 0;
+float accelZgPrev = 0;
+
+float gyroXdpsPrev = 0;
+float gyroYdpsPrev = 0;
+float gyroZdpsPrev = 0;
+
 const int MPU_ADDRESS = 0x68; // adress for the mpu module
 
 void setupMPU(){
@@ -73,7 +82,7 @@ void readMPU(){
   gyroYdps = round((gyroY / 131.0) * 10) / 10.0;
   gyroZdps = round((gyroZ / 131.0) * 10) / 10.0;
 
-  // TEST: print the mpu values
+  /* TEST: print the mpu values
   Serial.print("Accel X: ");
   Serial.print(accelXg);
   Serial.print("g | Y: ");
@@ -88,5 +97,5 @@ void readMPU(){
   Serial.print(gyroYdps);
   Serial.print("°/s | Z: ");
   Serial.print(gyroZdps);
-  Serial.println("°/s");
+  Serial.println("°/s");*/
 }

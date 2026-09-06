@@ -39,17 +39,17 @@ void processHeadPos(){ // // convert the MPU's reading into one of five head ori
     return;
   }
 
-  if(accelYg > smallGravThreshold){ // slight right
+  if(accelYg < smallGravThreshold){ // slight right
+    currentFaceDirection = NEUTRAL;
+    return;
+  }
+
+  if(accelYg < largeGravThreshold){ // full right
     currentFaceDirection = SLIGHT_RIGHT;
     return;
   }
 
-  if(accelYg > largeGravThreshold){ // full right
-    currentFaceDirection = FULL_RIGHT;
-    return;
-  }
-
-  currentFaceDirection = NEUTRAL;
+  currentFaceDirection = FULL_RIGHT;
 }
 
 void decideRandomAnimation(){ // decide which random animation we will do
@@ -78,22 +78,27 @@ void drawCurrentFace(int x, int y){
   switch(currentFaceDirection){ // otherwise for normal faces use this
 
     case FULL_LEFT:
+      userMadeInput = true;
       u8g2.drawXBMP(x, y, 120, 50, fullLeftFace);
       break;
 
     case SLIGHT_LEFT:
+      userMadeInput = true;
       u8g2.drawXBMP(x, y, 120, 50, slightLeftFace);
       break;
 
     case NEUTRAL:
+      userMadeInput = true;
       u8g2.drawXBMP(x, y, 120, 50, neutralFace);
       break;
 
     case SLIGHT_RIGHT:
+      userMadeInput = true;
       u8g2.drawXBMP(x, y, 120, 50, slightRightFace);
       break;
 
     case FULL_RIGHT:
+      userMadeInput = true;
       u8g2.drawXBMP(x, y, 120, 50, fullRightFace);
       break;
   }

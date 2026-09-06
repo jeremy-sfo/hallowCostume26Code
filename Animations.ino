@@ -10,13 +10,13 @@ void waitSumTime(unsigned long interval){
 }
 
 void characterBlinkingAnimation(){
-  //Serial.println(nextDelayTime);
+  //Serial.print("Blinking rn");
 
   u8g2.clearBuffer();
   u8g2.drawXBMP(6, 16, 120, 50, getBlinkBitmap());
   u8g2.sendBuffer();
 
-  waitSumTime(2);
+  waitSumTime(50);
 }
 
 void characterLookAroundAnimation(){
