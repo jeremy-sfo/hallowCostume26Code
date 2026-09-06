@@ -10,6 +10,7 @@ information and tell the oled what to display
 // define values from globals.h
 SimulatedAxis currentAxis = YAW;
 HeadOrientation currentFaceDirection = NEUTRAL;
+HeadOrientation previousFaceDirection = NEUTRAL;
 HeadOrientation animationFaceDirection = NEUTRAL;
 BehaviorMode currentBehavior = NORMAL; // define a starting behavior
 
@@ -29,27 +30,21 @@ const float largeGravThreshold = 0.5;
 
 void processHeadPos(){ // // convert the MPU's reading into one of five head orientations.
 
-  if(accelYg < -largeGravThreshold){ // full left
-    currentFaceDirection = FULL_LEFT;
+  if(accelYg < -largeGravThreshold) currentFaceDirection = FULL_LEFT;
+
+  else if(accelYg < -smallGravThreshold) currentFaceDirection = SLIGHT_LEFT;
+
+  else if(accelYg < smallGravThreshold) currentFaceDirection = NEUTRAL;
+
+  else if(accelYg < largeGravThreshold) currentFaceDirection = SLIGHT_RIGHT;
+
+  else currentFaceDirection = FULL_RIGHT;
+
+  if(previousFaceDirection != currentFaceDirection){ // if the face direction changed, AKA user made input
+
+    userMadeInput = true;
     return;
   }
-
-  if(accelYg < -smallGravThreshold){ // slight left
-    currentFaceDirection = SLIGHT_LEFT;
-    return;
-  }
-
-  if(accelYg < smallGravThreshold){ // slight right
-    currentFaceDirection = NEUTRAL;
-    return;
-  }
-
-  if(accelYg < largeGravThreshold){ // full right
-    currentFaceDirection = SLIGHT_RIGHT;
-    return;
-  }
-
-  currentFaceDirection = FULL_RIGHT;
 }
 
 void decideRandomAnimation(){ // decide which random animation we will do
@@ -78,27 +73,22 @@ void drawCurrentFace(int x, int y){
   switch(currentFaceDirection){ // otherwise for normal faces use this
 
     case FULL_LEFT:
-      userMadeInput = true;
       u8g2.drawXBMP(x, y, 120, 50, fullLeftFace);
       break;
 
     case SLIGHT_LEFT:
-      userMadeInput = true;
       u8g2.drawXBMP(x, y, 120, 50, slightLeftFace);
       break;
 
     case NEUTRAL:
-      userMadeInput = true;
       u8g2.drawXBMP(x, y, 120, 50, neutralFace);
       break;
 
     case SLIGHT_RIGHT:
-      userMadeInput = true;
       u8g2.drawXBMP(x, y, 120, 50, slightRightFace);
       break;
 
     case FULL_RIGHT:
-      userMadeInput = true;
       u8g2.drawXBMP(x, y, 120, 50, fullRightFace);
       break;
   }
@@ -143,4 +133,5 @@ void processingLoop(){
   animateCharacter();
 
   prevMillis = millis();
+  previousFaceDirection = currentFaceDirection;
 }

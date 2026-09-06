@@ -18,7 +18,7 @@ void setupOled(){
 
 const unsigned char* getBlinkBitmap(){
   
-  switch(currentFaceDirection){
+  switch(previousFaceDirection){
 
     case FULL_RIGHT:
       return directionalBitmaps[0];

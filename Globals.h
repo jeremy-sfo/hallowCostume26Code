@@ -93,6 +93,7 @@ extern boolean characterDoingAnimation; // if there is currently an animation pl
 
 // DIRECTION STATES
 extern HeadOrientation currentFaceDirection; // the direction the user wants
+extern HeadOrientation previousFaceDirection;
 extern HeadOrientation animationFaceDirection; // the direction the animation chooses
 
 // DIRECTION DATA
