@@ -17,7 +17,10 @@ void setupOled(){
 }
 
 const unsigned char* getBlinkBitmap(){
-  
+
+  Serial.print("Blink direction: ");
+  Serial.println(previousFaceDirection);
+
   switch(previousFaceDirection){
 
     case FULL_RIGHT:
@@ -36,8 +39,10 @@ const unsigned char* getBlinkBitmap(){
       return directionalBitmaps[4];
   }
 
-  return directionalBitmaps[2]; // in case the above don't happen have smth just in case
+  Serial.println("INVALID DIRECTION!");
+  return directionalBitmaps[2];
 }
+
 
 void updateOled(){
 

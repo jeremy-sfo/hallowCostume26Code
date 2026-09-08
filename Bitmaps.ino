@@ -515,11 +515,11 @@ const unsigned char blinkFace5 [] PROGMEM = {
 };
 
 const unsigned char* directionalBitmaps[5] = {
-	fullRightFace,
-	slightRightFace,
-	neutralFace,
-	slightLeftFace,
-	fullLeftFace
+	blinkFace5,
+	blinkFace4,
+	blinkFace1,
+	blinkFace3,
+	blinkFace2
 };
 
 const unsigned char* blinkBitmaps[5] = {

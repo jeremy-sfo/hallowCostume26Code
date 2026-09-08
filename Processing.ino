@@ -40,11 +40,11 @@ void processHeadPos(){ // // convert the MPU's reading into one of five head ori
 
   else currentFaceDirection = FULL_RIGHT;
 
-  if(previousFaceDirection != currentFaceDirection){ // if the face direction changed, AKA user made input
+  if(previousFaceDirection != currentFaceDirection) userMadeInput = true; // if the face direction changed, AKA user made input
 
-    userMadeInput = true;
-    return;
-  }
+  else userMadeInput = false;
+
+  return;
 }
 
 void decideRandomAnimation(){ // decide which random animation we will do
@@ -123,7 +123,7 @@ void animateCharacter() {
       characterDoingAnimation = false;
 
       animationTimer = millis();
-      nextDelayTime = random(1800, 8000);
+      nextDelayTime = random(2500, 10000);
     }
   }
 }
